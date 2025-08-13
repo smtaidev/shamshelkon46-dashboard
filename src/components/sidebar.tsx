@@ -16,6 +16,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { toast } from "sonner";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -37,6 +38,28 @@ export function Sidebar() {
     // if (isMobile) {
     dispatch(closeSidebar());
     // }
+  };
+
+  const handleLogout = () => {
+    toast.promise(
+      new Promise<void>((resolve, reject) => {
+        setTimeout(() => {
+          // Simulate a 90% chance of successful logout
+          const isSuccess = Math.random() > 0.1;
+
+          if (isSuccess) {
+            resolve();
+          } else {
+            reject(new Error("Network error"));
+          }
+        }, 1000);
+      }),
+      {
+        loading: "Logging out...",
+        success: "You have been logged out 👋",
+        error: (err) => `Logout failed: ${err.message}`,
+      }
+    );
   };
 
   return (
@@ -85,7 +108,7 @@ export function Sidebar() {
           </nav>
 
           {/* Sign Out */}
-          <div className="p-4 border-t">
+          <div className="p-4 border-t" onClick={handleLogout}>
             <button className="flex items-center gap-3 px-3 py-2 w-full text-left text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors">
               <LogOut className="w-5 h-5" />
               Sign Out

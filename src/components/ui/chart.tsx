@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
 import * as React from "react"
@@ -118,13 +119,22 @@ function ChartTooltipContent({
   color,
   nameKey,
   labelKey,
-}: React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
+}: Omit<React.ComponentProps<typeof RechartsPrimitive.Tooltip>, "payload"> &
   React.ComponentProps<"div"> & {
+    payload?: Array<{
+      name?: string
+      dataKey?: string
+      value?: number | string
+      color?: string
+      payload?: any
+      [key: string]: any
+    }>
     hideLabel?: boolean
     hideIndicator?: boolean
     indicator?: "line" | "dot" | "dashed"
     nameKey?: string
     labelKey?: string
+    label?: string
   }) {
   const { config } = useChart()
 
@@ -257,7 +267,14 @@ function ChartLegendContent({
   verticalAlign = "bottom",
   nameKey,
 }: React.ComponentProps<"div"> &
-  Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
+  {
+    payload?: Array<{
+      dataKey?: string
+      value?: string
+      color?: string
+      [key: string]: any
+    }>
+    verticalAlign?: "top" | "bottom" | "middle"
     hideIcon?: boolean
     nameKey?: string
   }) {
