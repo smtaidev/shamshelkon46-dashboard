@@ -28,7 +28,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       <Sidebar />
 
       {/* Mobile overlay */}
-      {isMobile && sidebarOpen && (
+      {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={() => dispatch({ type: "ui/closeSidebar" })}

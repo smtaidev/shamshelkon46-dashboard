@@ -30,30 +30,39 @@ const navigation = [
 export function Sidebar() {
   const pathname = usePathname();
   const dispatch = useAppDispatch();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { sidebarOpen, isMobile } = useAppSelector((state) => state.ui);
 
   const handleLinkClick = () => {
-    if (isMobile) {
-      dispatch(closeSidebar());
-    }
+    // if (isMobile) {
+    dispatch(closeSidebar());
+    // }
   };
 
   return (
     <>
       <div
         className={cn(
-          "fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0",
-          isMobile ? (sidebarOpen ? "translate-x-0" : "-translate-x-full") : ""
+          "fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-none border-none transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0",
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
         <div className="flex flex-col h-full">
           {/* Logo */}
-          <div className="flex items-center gap-2 p-6 border-b">
-            <Image src={"/logo.png"} width={300} height={300} alt="EventX" />
+          <div className="flex items-center justify-center gap-2 p-6">
+            <div className="w-36 h-auto">
+              <Image
+                src="/logo.png"
+                width={144}
+                height={36}
+                alt="EventX"
+                className="object-contain"
+              />
+            </div>
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 px-4 py-6 space-y-2">
+          <nav className="flex-1 px-4  space-y-2">
             {navigation.map((item) => {
               const isActive = pathname === item.href;
               return (
