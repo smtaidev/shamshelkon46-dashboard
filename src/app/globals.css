@@ -12,6 +12,7 @@
   --color-success: #28af89;
   --color-info: #17a2b8;
   --color-warning: #ffc107;
+  --color-warning2: #cf7106;
   --color-danger: #dc3545;
   --color-warningSoft: #f06812;
   --color-background-secondary: #4a5565;
@@ -25,7 +26,7 @@
   --color-secondary: #b2a2ff;
   --color-success: #22c55e;
   --color-info: #90e0ef;
-  --color-warning: #facc15;
+  --color-warning: #ffc107;
   --color-danger: #d7191c;
 }
 

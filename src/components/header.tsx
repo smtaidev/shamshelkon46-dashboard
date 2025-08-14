@@ -12,21 +12,26 @@ import { Input } from "@/components/ui/input";
 import { useAppDispatch } from "@/lib/store";
 import { toggleSidebar } from "@/lib/uiSlice";
 import { Bell, ChevronDown, Menu, Search } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { RiCloseLargeLine } from "react-icons/ri";
 export function Header() {
+  const pathname = usePathname();
+  console.log("route pathname", pathname);
   const dispatch = useAppDispatch();
   const [searchText, setSearchText] = useState("");
   //   const { isMobile } = useAppSelector((state) => state.ui);
   //   const isMobile = window.innerWidth < 1280;
-
+  const totalUsers = 134872;
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDropdownToggle = () => {
     setIsOpen(!isOpen);
     console.log(`Dropdown is now: ${isOpen ? "Closed" : "Open"}`);
   };
-
+  // Extract the main route segment (e.g., 'users' from '/dashboard/users')
+  const routeSegment = pathname.split("/").filter(Boolean).pop() || "dashboard";
+  //   console.log("routeSegment", routeSegment);
   return (
     <header className="bg-white px-4 sm:px-6 py-3 sm:py-9">
       <div className="flex items-center justify-between gap-4">
@@ -43,19 +48,91 @@ export function Header() {
           {/* )} */}
 
           <div className="relative w-full max-w-2xl">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-background-secondary w-6 h-6" />
-            <Input
-              placeholder="Search anything..."
-              onChange={(e) => setSearchText(e.target.value)}
-              value={searchText}
-              className="pl-12 py-6 bg-gray-50 border-background-secondary/10 w-full placeholder:text-base focus:outline-none focus:ring-1 focus:ring-primary"
-            />
-            {searchText && (
-              <RiCloseLargeLine
-                onClick={() => setSearchText("")}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 hover:cursor-pointer text-gray-500"
-              />
-            )}
+            <div className="relative w-full max-w-2xl">
+              {routeSegment.includes("users") ? (
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <div>
+                    <h1 className="md:text-2xl font-bold text-gray-900">
+                      User Management
+                    </h1>
+                    <p className="text-sm text-gray-600 mt-1">
+                      Total {totalUsers.toLocaleString()} Users
+                    </p>
+                  </div>
+                </div>
+              ) : routeSegment.includes("events") ? (
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <div>
+                    <h1 className="md:text-2xl font-bold text-gray-900">
+                      Event Management
+                    </h1>
+                    <p className="text-sm text-gray-600 mt-1">
+                      Manage and monitor all events on the platform
+                    </p>
+                  </div>
+                </div>
+              ) : routeSegment.includes("reports") ? (
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <div>
+                    <h1 className="md:text-2xl font-bold text-gray-900">
+                      Reports & Moderation
+                    </h1>
+                    <p className="text-sm text-gray-600 mt-1">
+                      Manage and monitor all reports of the platform
+                    </p>
+                  </div>
+                </div>
+              ) : routeSegment.includes("revenue") ? (
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <div>
+                    <h1 className="md:text-2xl font-bold text-gray-900">
+                      Revenue Management
+                    </h1>
+                    <p className="text-sm text-gray-600 mt-1">
+                      See the revenue performance of EventX
+                    </p>
+                  </div>
+                </div>
+              ) : routeSegment.includes("settings") ? (
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <div>
+                    <h1 className="md:text-2xl font-bold text-gray-900">
+                      Settings
+                    </h1>
+                    <p className="text-sm text-gray-600 mt-1">
+                      Manage all settings of the platform
+                    </p>
+                  </div>
+                </div>
+              ) : routeSegment.includes("profile") ? (
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <div>
+                    <h1 className="md:text-2xl font-bold text-gray-900">
+                      Admin Profile
+                    </h1>
+                    <p className="text-sm text-gray-600 mt-1">
+                      Manage profile details
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-background-secondary w-6 h-6" />
+                  <Input
+                    placeholder="Search anything..."
+                    onChange={(e) => setSearchText(e.target.value)}
+                    value={searchText}
+                    className="pl-12 py-6 bg-gray-50 border-background-secondary/10 w-full placeholder:text-base focus:outline-none focus:ring-1 focus:ring-primary"
+                  />
+                  {searchText && (
+                    <RiCloseLargeLine
+                      onClick={() => setSearchText("")}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 hover:cursor-pointer text-gray-500"
+                    />
+                  )}
+                </>
+              )}
+            </div>
           </div>
         </div>
 

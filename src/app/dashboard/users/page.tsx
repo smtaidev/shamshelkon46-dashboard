@@ -3,6 +3,8 @@
 import { CustomDropdown } from "@/components/ui/CustomDropdown";
 import { DataTable, TableColumn } from "@/components/ui/DataTable";
 import { Pagination } from "@/components/ui/pagination";
+import { cn } from "@/lib/utils";
+
 import { Download, Search } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -85,7 +87,7 @@ export default function UsersPage() {
   const [dateFilter, setDateFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalUsers = 134872;
+  //   const totalUsers = 134872;
   const totalPages = 203;
   const perPage = 6;
 
@@ -96,28 +98,32 @@ export default function UsersPage() {
   };
 
   const handlePageChange = (page: number) => {
-    console.log(`Navigating to page ${page}`);
+    // console.log(`Navigating to page ${page}`);
     setCurrentPage(page);
   };
+
   //   console.log(searchText);
   return (
     <div className="p-6 space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <button
+          onClick={handleExport}
+          className="inline-flex items-center !px-5 !py-3 btn-gradient text-white text-sm font-medium rounded-lg hover:bg-purple-700 transition-colors duration-200"
+        >
+          <Download className="w-4 h-4 mr-2" />
+          Export List
+        </button>
+      </div>
+      {/* This should be shows in dashboard header (replace this dynamically instead of the input field over there) - there should be dynamically shows every route data individually */}
+      {/* <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">User Management</h1>
           <p className="text-sm text-gray-600 mt-1">
             Total {totalUsers.toLocaleString()} Users
           </p>
         </div>
-        <button
-          onClick={handleExport}
-          className="inline-flex items-center px-4 py-2.5 bg-purple-600 text-white text-sm font-medium rounded-lg hover:bg-purple-700 transition-colors duration-200"
-        >
-          <Download className="w-4 h-4 mr-2" />
-          Export List
-        </button>
-      </div>
+      </div> */}
 
       {/* Filters */}
       <div className="flex flex-col xl:flex-row lg:justify-between gap-4">
@@ -167,15 +173,23 @@ export default function UsersPage() {
       </div>
 
       {/* Table */}
-      <DataTable columns={columns} data={currentData} />
-
-      {/* Pagination */}
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-        showingText={`Showing ${currentPage} of ${totalPages} pages`}
-      />
+      <div className="">
+        <DataTable columns={columns} data={currentData} />
+        <div
+          className={cn(
+            "bg-white border border-t-none border-gray-200 overflow-hidden",
+            "rounded-t-none rounded-b-lg p-4"
+          )}
+        >
+          {/* Pagination */}
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+            showingText={`Showing ${currentPage} of ${totalPages} pages`}
+          />
+        </div>
+      </div>
     </div>
   );
 }
