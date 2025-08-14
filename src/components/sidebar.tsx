@@ -79,7 +79,8 @@ export function Sidebar() {
                 width={144}
                 height={36}
                 alt="EventX"
-                className="object-contain"
+                className="w-full h-auto object-contain"
+                priority
               />
             </div>
           </div>

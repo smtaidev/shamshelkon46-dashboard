@@ -181,3 +181,6 @@ body .skiptranslate {
 .btn-gradient {
   @apply bg-gradient-to-r from-[#C9634A] to-[#5E24AF] text-white px-4 py-2 rounded-lg;
 }
+.custom-gradient {
+  @apply from-[#C9634A] to-[#5E24AF];
+}
