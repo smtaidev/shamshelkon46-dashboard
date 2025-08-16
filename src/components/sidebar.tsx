@@ -73,14 +73,14 @@ export function Sidebar() {
         <div className="flex flex-col h-full">
           {/* Logo */}
           <div className="flex items-center justify-center gap-2 p-6">
-            <div className="w-36 h-auto">
+            <div className="relative" style={{ width: 200, height: 50 }}>
               <Image
                 src="/logo.png"
-                width={144}
-                height={36}
+                fill
                 alt="EventX"
-                className="w-full h-auto object-contain"
+                className="object-contain"
                 priority
+                sizes="h-auto w-auto"
               />
             </div>
           </div>

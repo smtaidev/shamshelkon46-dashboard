@@ -52,7 +52,7 @@ export function SalesDistribution() {
       </h3>
 
       <div className="flex justify-center mb-8">
-        <div className="w-72 h-72 sm:w-80 sm:h-80">
+        <div className="w-72 h-72">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie

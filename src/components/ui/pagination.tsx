@@ -53,7 +53,7 @@ export function Pagination({
   return (
     <div
       className={cn(
-        "flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4",
+        "flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 overflow-x-auto",
         className
       )}
     >

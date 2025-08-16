@@ -59,8 +59,11 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 export function RevenueChart() {
   return (
     <div className="w-full bg-white p-6 rounded-lg">
-      <div className="flex items-center justify-between mb-8">
-        <h3 className="text-xl font-semibold text-gray-900">Revenue Stats</h3>
+      <div className="md:flex items-center justify-between mb-8">
+        <h3 className="text-xl font-semibold text-gray-900 mb-4 md:mb-0 text-center md:text-left">
+          Revenue Stats
+        </h3>
+
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-primary"></div>
@@ -77,7 +80,7 @@ export function RevenueChart() {
         <ResponsiveContainer>
           <BarChart
             data={chartData}
-            margin={{ top: 40, right: 30, left: 40, bottom: 20 }}
+            margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
             barCategoryGap="20%"
           >
             <CartesianGrid

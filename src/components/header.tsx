@@ -13,17 +13,18 @@ import { useAppDispatch } from "@/lib/store";
 import { toggleSidebar } from "@/lib/uiSlice";
 import { Bell, ChevronDown, Menu, Search } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { RiCloseLargeLine } from "react-icons/ri";
 export function Header() {
   const pathname = usePathname();
-  console.log("route pathname", pathname);
+  //   console.log("route pathname", pathname);
   const dispatch = useAppDispatch();
   const [searchText, setSearchText] = useState("");
   //   const { isMobile } = useAppSelector((state) => state.ui);
   //   const isMobile = window.innerWidth < 1280;
   const totalUsers = 134872;
   const [isOpen, setIsOpen] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null); // ref for search anything input field
 
   const handleDropdownToggle = () => {
     setIsOpen(!isOpen);
@@ -115,23 +116,27 @@ export function Header() {
                     </p>
                   </div>
                 </div>
-              ) : (
+              ) : routeSegment.includes("dashboard") ? (
                 <>
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-background-secondary w-6 h-6" />
                   <Input
+                    ref={inputRef}
                     placeholder="Search anything..."
                     onChange={(e) => setSearchText(e.target.value)}
                     value={searchText}
-                    className="pl-12 py-6 bg-gray-50 border-background-secondary/10 w-full placeholder:text-base focus:outline-none focus:ring-1 focus:ring-primary"
+                    className="pl-12 py-6 bg-gray-50 border border-background-secondary/10 w-full placeholder:text-base focus:outline-none focus:ring-1 focus:ring-primary transition-all duration-200"
                   />
                   {searchText && (
                     <RiCloseLargeLine
-                      onClick={() => setSearchText("")}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 hover:cursor-pointer text-gray-500"
+                      onClick={() => {
+                        setSearchText("");
+                        inputRef.current?.focus();
+                      }}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 hover:cursor-pointer text-gray-500 hover:text-gray-700"
                     />
                   )}
                 </>
-              )}
+              ) : null}
             </div>
           </div>
         </div>

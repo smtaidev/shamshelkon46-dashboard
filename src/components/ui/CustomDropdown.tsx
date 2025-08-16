@@ -45,7 +45,7 @@ export function CustomDropdown({
 
   const handleSelect = (optionValue: string) => {
     onChange(optionValue);
-    console.log(`Selected: ${optionValue}`);
+    // console.log(`Selected: ${optionValue}`);
     setIsOpen(false);
   };
 
@@ -53,7 +53,7 @@ export function CustomDropdown({
     <div className={cn("relative", className)} ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between w-full px-4 py-2.5 text-sm font-medium text-gray-700 bg-white  rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+        className="flex items-center justify-between w-full px-4 py-3 text-sm font-medium text-gray-700 bg-white  rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-1 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
       >
         <span className={cn("truncate", !selectedOption && "text-gray-500")}>
           {selectedOption ? selectedOption.label : placeholder}
