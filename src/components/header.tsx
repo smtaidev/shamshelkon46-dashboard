@@ -12,9 +12,11 @@ import { Input } from "@/components/ui/input";
 import { useAppDispatch } from "@/lib/store";
 import { toggleSidebar } from "@/lib/uiSlice";
 import { Bell, ChevronDown, Menu, Search } from "lucide-react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRef, useState } from "react";
 import { RiCloseLargeLine } from "react-icons/ri";
+import { toast } from "sonner";
 export function Header() {
   const pathname = usePathname();
   //   console.log("route pathname", pathname);
@@ -33,6 +35,31 @@ export function Header() {
   // Extract the main route segment (e.g., 'users' from '/dashboard/users')
   const routeSegment = pathname.split("/").filter(Boolean).pop() || "dashboard";
   //   console.log("routeSegment", routeSegment);
+
+  //   Perform logout functionality - (This is a simulation logout - replace with the actual function)
+
+  const handleLogout = () => {
+    toast.promise(
+      new Promise<void>((resolve, reject) => {
+        setTimeout(() => {
+          // Simulate a 90% chance of successful logout
+          const isSuccess = Math.random() > 0.1;
+
+          if (isSuccess) {
+            resolve();
+          } else {
+            reject(new Error("Network error"));
+          }
+        }, 1000);
+      }),
+      {
+        loading: "Logging out...",
+        success: "You have been logged out 👋",
+        error: (err) => `Logout failed: ${err.message}`,
+      }
+    );
+  };
+
   return (
     <header className="bg-white px-4 sm:px-6 py-3 sm:py-9">
       <div className="flex items-center justify-between gap-4">
@@ -172,15 +199,21 @@ export function Header() {
             </DropdownMenuTrigger>
 
             <DropdownMenuContent align="end" className="bg-white p-1 w-48">
-              <DropdownMenuItem className="hover:bg-gray-100 hover:cursor-pointer px-3 py-2 text-sm">
-                Profile
-              </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-gray-100 hover:cursor-pointer px-3 py-2 text-sm">
-                Settings
-              </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-gray-100 hover:cursor-pointer px-3 py-2 text-sm text-red-600">
-                Sign out
-              </DropdownMenuItem>
+              <Link href={"/dashboard/profile"}>
+                <DropdownMenuItem className="hover:bg-gray-100 hover:cursor-pointer px-3 py-2 text-sm">
+                  Profile
+                </DropdownMenuItem>
+              </Link>
+              <Link href={"/dashboard/settings"}>
+                <DropdownMenuItem className="hover:bg-gray-100 hover:cursor-pointer px-3 py-2 text-sm">
+                  Settings
+                </DropdownMenuItem>
+              </Link>
+              <div onClick={handleLogout}>
+                <DropdownMenuItem className="hover:bg-gray-100 hover:cursor-pointer px-3 py-2 text-sm text-red-600">
+                  Sign out
+                </DropdownMenuItem>
+              </div>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

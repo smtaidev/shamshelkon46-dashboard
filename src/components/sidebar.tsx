@@ -5,7 +5,7 @@ import { closeSidebar } from "@/lib/uiSlice";
 import { cn } from "@/lib/utils";
 import {
   Calendar,
-  DollarSign,
+  CircleDollarSign,
   FileText,
   LayoutDashboard,
   LogOut,
@@ -23,7 +23,7 @@ const navigation = [
   { name: "Users", href: "/dashboard/users", icon: Users },
   { name: "Events", href: "/dashboard/events", icon: Calendar },
   { name: "Reports", href: "/dashboard/reports", icon: FileText },
-  { name: "Revenue", href: "/dashboard/revenue", icon: DollarSign },
+  { name: "Revenue", href: "/dashboard/revenue", icon: CircleDollarSign },
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
   { name: "Profile", href: "/dashboard/profile", icon: User },
 ];
@@ -95,10 +95,10 @@ export function Sidebar() {
                   href={item.href}
                   onClick={handleLinkClick}
                   className={cn(
-                    "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+                    "flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium transition-colors",
                     isActive
                       ? "bg-purple-100 text-purple-700"
-                      : "text-background-secondary hover:bg-gray-100 hover:text-gray-900"
+                      : "text-[#727272] hover:bg-gray-100 hover:text-gray-900"
                   )}
                 >
                   <item.icon className="w-5 h-5" />
